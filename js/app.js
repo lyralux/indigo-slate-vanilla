@@ -173,7 +173,7 @@
                 for( var i = 0, len = this.levels.length; i < len; ++i ) {
                     var levelEl = this.levels[i];
                         if(classie.has(levelEl, 'level_3')) {
-                            console.log(levelEl)
+
                         } else if( levelEl != subLevel && !classie.has( levelEl, 'level_open' ) ) {
                             this._setTransform( 'translate3d(100%,0,0)', levelEl );
                         }
@@ -254,7 +254,7 @@
         },
         // close sub menus
         _closeMenu : function() {
-            // this._setTransform( 'translate3d(100%,0,0)' );
+            // this._setTransform( 'translate3d(-100%,0,0)' );
             this._toggleLevels();
         },
         // translate the el
@@ -264,7 +264,7 @@
             el.style.MozTransform = val;
             el.style.transform = val;
         },
-        // removes classes mp-level-open from closing levels
+        // removes classes from closing levels
         _toggleLevels : function() {
             for( var i = 0, len = this.levels.length; i < len; ++i ) {
                 var levelEl = this.levels[i];
@@ -274,7 +274,12 @@
                 }
 
                 if( levelEl.getAttribute( 'data-level' ) >= this.level + 1 ) {
-                    classie.remove( closest(levelEl, 'menu_item'), 'active');
+
+                    if(this.level > 0) {
+                        classie.remove( closest(levelEl, 'menu_item'), 'active');
+                    }
+
+
                     classie.remove( levelEl, 'level_open' );
                     classie.remove( levelEl, 'level_overlay' );
                 }
@@ -283,9 +288,8 @@
                 }
             }
         }
-    }
+    };
 
-    // add to global namespace
     window.MenuApp = MenuApp;
 
 } )( window );
